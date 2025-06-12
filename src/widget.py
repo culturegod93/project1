@@ -1,7 +1,8 @@
-from masks import get_mask_card_number, get_mask_account
+from .masks import get_mask_account
+from .masks import get_mask_card_number
 
 
-def mask_account_card (info: str) -> str:
+def mask_account_card(info: str) -> str:
     """Функция обработки и маскировки, в зависимости от типа"""
     info = str(info)
     parts = info.strip().split()
@@ -16,7 +17,7 @@ def mask_account_card (info: str) -> str:
     return f"{name} {masked}"
 
 
-def get_data (date: str) -> str:
+def get_data(date: str) -> str:
     """Функция преобразования даты"""
     date_part = date.split("T")[0]
     year, month, day = date_part.split("-")
