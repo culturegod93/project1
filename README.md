@@ -19,10 +19,6 @@ git clone https://github.com/culturegod93/project1
 pip install -r requirements.txt
 ~~~
 
-## Использование:
-
-...
-
 ## Документация:
 
 Дополнительную информацию о проекте можно найти в README.md.
