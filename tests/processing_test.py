@@ -65,3 +65,19 @@ def test_sort_by_date_all_missing_date() -> None:
     ]
     result = sort_by_date(data)
     assert [item["id"] for item in result] == [1, 2]
+
+
+def test_filter_by_state_empty_list() -> None:
+    """Фильтрация по состоянию должна возвращать пустой список, если вход пуст."""
+    assert filter_by_state([]) == []
+
+
+def test_sort_by_date_all_elements_without_date() -> None:
+    """Все элементы без ключа date — порядок не должен ломаться."""
+    data = [
+        {"id": 10, "state": "EXECUTED"},
+        {"id": 20, "state": "CANCELED"},
+        {"id": 30, "state": "PENDING"},
+    ]
+    result = sort_by_date(data)
+    assert [item["id"] for item in result] == [10, 20, 30]
