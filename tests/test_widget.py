@@ -2,36 +2,27 @@ from src.widget import get_data
 from src.widget import mask_account_card
 
 
-def test_mask_account_card_visa() -> None:
-    result = mask_account_card("Visa Platinum 7000792289606361")
-    assert result == "Visa Platinum 7000 79** **** 6361"
+def test_mask_account_card_credit_cards() -> None:
+    assert mask_account_card("Visa Platinum 7000792289606361") == "Visa Platinum 7000 79** **** 6361"
+    assert mask_account_card("Mastercard 1234567890123456") == "Mastercard 1234 56** **** 3456"
+    assert mask_account_card("Maestro 1111222233334444") == "Maestro 1111 22** **** 4444"
 
 
-def test_mask_account_card_account() -> None:
-    result = mask_account_card("Счет 73654108430135874305")
-    assert result == "Счет **4305"
+def test_mask_account_card_accounts() -> None:
+    assert mask_account_card("Счет 73654108430135874305") == "Счет **4305"
+    assert mask_account_card("Account 12345678901234567890") == "Account **7890"
+    assert mask_account_card("Счёт 98765432109876543210") == "Счёт **3210"
 
 
-def test_mask_account_card_mastercard() -> None:
-    result = mask_account_card("Mastercard 1234567890123456")
-    assert result == "Mastercard 1234 56** **** 3456"
+def test_mask_account_card_unknown_type() -> None:
+    # Если тип не определен, возвращается строка с номером без маскировки
+    assert mask_account_card("UnknownType 123456789") == "UnknownType 123456789"
+    assert mask_account_card("Random 123") == "Random 123"
+    # Если нет числа - возвращаем оригинал
+    assert mask_account_card("NoNumberHere") == "NoNumberHere"
 
 
-def test_mask_account_card_maestro() -> None:
-    result = mask_account_card("Maestro 9876543210987654")
-    assert result == "Maestro 9876 54** **** 7654"
-
-
-def test_mask_account_card_unknown_format() -> None:
-    result = mask_account_card("NoDigitsHere")
-    assert result == "NoDigitsHere"
-
-
-def test_get_data() -> None:
-    result = get_data("2024-03-11T02:26:18.671407")
-    assert result == "11.03.2024"
-
-
-def test_get_data_with_different_date() -> None:
-    result = get_data("2023-12-31T23:59:59.999999")
-    assert result == "31.12.2023"
+def test_get_data_format() -> None:
+    assert get_data("2024-03-11T02:26:18.671407") == "11.03.2024"
+    assert get_data("1999-12-31T23:59:59.000000") == "31.12.1999"
+    assert get_data("2000-01-01T00:00:00") == "01.01.2000"

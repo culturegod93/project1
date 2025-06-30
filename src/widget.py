@@ -23,6 +23,8 @@ def mask_account_card(info: str) -> str:
         masked = get_mask_card_number(number)
     elif name.lower().split()[0] in ["account", "счет", "счёт"] or len(number) > 16:
         masked = get_mask_account(number)
+    else:
+        masked = number  # если не удалось определить тип — верни как есть
 
     return f"{name} {masked}"
 

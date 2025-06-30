@@ -1,14 +1,16 @@
+from typing import Any
+
 from src.processing import filter_by_state
 from src.processing import sort_by_date
 
 
 def test_filter_by_state_default() -> None:
-    data = [
+    data: list[dict[str, Any]] = [
         {"id": 1, "state": "EXECUTED"},
         {"id": 2, "state": "CANCELED"},
         {"id": 3, "state": "EXECUTED"},
     ]
-    expected = [
+    expected: list[dict[str, Any]] = [
         {"id": 1, "state": "EXECUTED"},
         {"id": 3, "state": "EXECUTED"},
     ]
@@ -16,74 +18,69 @@ def test_filter_by_state_default() -> None:
 
 
 def test_filter_by_state_custom_value() -> None:
-    data = [
+    data: list[dict[str, Any]] = [
         {"id": 1, "state": "CANCELED"},
         {"id": 2, "state": "EXECUTED"},
     ]
-    result = filter_by_state(data, state="CANCELED")
-    assert result == [{"id": 1, "state": "CANCELED"}]
+    assert filter_by_state(data, state="CANCELED") == [{"id": 1, "state": "CANCELED"}]
 
 
 def test_filter_by_state_no_matching() -> None:
-    data = [
+    data: list[dict[str, Any]] = [
         {"id": 1, "state": "CANCELED"},
         {"id": 2, "state": "CANCELED"},
     ]
-    result = filter_by_state(data, state="EXECUTED")
-    assert result == []
+    assert filter_by_state(data, state="EXECUTED") == []
 
 
 def test_filter_by_state_missing_key() -> None:
-    data = [
+    data: list[dict[str, Any]] = [
         {"id": 1},
         {"id": 2, "state": "EXECUTED"},
         {"id": 3, "status": "EXECUTED"},
     ]
-    result = filter_by_state(data)
-    assert result == [{"id": 2, "state": "EXECUTED"}]
+    assert filter_by_state(data) == [{"id": 2, "state": "EXECUTED"}]
 
 
 def test_filter_by_state_empty_list() -> None:
-    assert filter_by_state([]) == []
+    data: list[dict[str, Any]] = []
+    assert filter_by_state(data) == []
 
 
 def test_sort_by_date_descending_default() -> None:
-    data = [
+    data: list[dict[str, Any]] = [
         {"id": 1, "date": "2020-01-01T00:00:00"},
         {"id": 2, "date": "2021-01-01T00:00:00"},
     ]
-    result = sort_by_date(data)
-    expected = [
+    expected: list[dict[str, Any]] = [
         {"id": 2, "date": "2021-01-01T00:00:00"},
         {"id": 1, "date": "2020-01-01T00:00:00"},
     ]
-    assert result == expected
+    assert sort_by_date(data) == expected
 
 
 def test_sort_by_date_ascending() -> None:
-    data = [
+    data: list[dict[str, Any]] = [
         {"id": 2, "date": "2021-01-01T00:00:00"},
         {"id": 1, "date": "2020-01-01T00:00:00"},
     ]
-    result = sort_by_date(data, reverse=False)
-    expected = [
+    expected: list[dict[str, Any]] = [
         {"id": 1, "date": "2020-01-01T00:00:00"},
         {"id": 2, "date": "2021-01-01T00:00:00"},
     ]
-    assert result == expected
+    assert sort_by_date(data, reverse=False) == expected
 
 
 def test_sort_by_date_with_equal_dates() -> None:
-    data = [
+    data: list[dict[str, Any]] = [
         {"id": 1, "date": "2020-01-01T00:00:00"},
         {"id": 2, "date": "2020-01-01T00:00:00"},
     ]
-    result = sort_by_date(data)
-    assert result == data
+    assert sort_by_date(data) == data
 
 
 def test_sort_by_date_missing_key_raises_keyerror() -> None:
-    data = [
+    data: list[dict[str, Any]] = [
         {"id": 1, "date": "2021-01-01T00:00:00"},
         {"id": 2},
     ]
@@ -91,8 +88,9 @@ def test_sort_by_date_missing_key_raises_keyerror() -> None:
         sort_by_date(data)
         assert False, "Expected KeyError for missing 'date'"
     except KeyError:
-        assert True
+        pass  # ожидаемое исключение
 
 
 def test_sort_by_date_empty_list() -> None:
-    assert sort_by_date([]) == []
+    data: list[dict[str, Any]] = []
+    assert sort_by_date(data) == []
