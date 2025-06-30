@@ -8,9 +8,11 @@ def get_mask_card_number(card_number: str) -> str:
 
 def get_mask_account(account_number: str) -> str:
     """Функция маскировки номера банковского счета"""
-    account_number = str(account_number)
-
-    return f"**{account_number[-4:]}"
+    if not account_number:
+        return ""
+    # остальной код маскировки (например, показать последние 4 цифры и замаскировать остальные)
+    masked = "**" + account_number[-4:] if len(account_number) >= 4 else "**"
+    return masked
 
 
 # Проверка

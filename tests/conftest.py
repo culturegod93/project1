@@ -1,5 +1,6 @@
-import pytest
 from typing import Any
+
+import pytest
 
 
 @pytest.fixture
@@ -10,7 +11,7 @@ def sample_operations() -> list[dict[str, Any]]:
         {"id": 3, "state": "EXECUTED", "date": "2019-11-15T18:45:00"},
         {"id": 4, "state": "PENDING", "date": "2022-03-22T10:00:00"},
         {"id": 5, "date": "2022-03-22T10:00:00"},  # Без state
-        {"id": 6, "state": "EXECUTED"},            # Без даты
+        {"id": 6, "state": "EXECUTED"},  # Без даты
     ]
 
 
