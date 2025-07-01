@@ -30,10 +30,14 @@ Project 1
 В проекте реализованы автоматические тесты с использованием pytest и фикстур.
 
 1. Запуск тестов:
+~~~
 poetry run pytest
+~~~
 
 2. Проверка покрытия:
+~~~
 poetry run pytest --cov=src
+~~~
 
 Тестируемые модули: masks.py, widget.py, processing.py.
 
