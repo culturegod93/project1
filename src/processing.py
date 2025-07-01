@@ -2,20 +2,17 @@ from typing import Any
 
 
 def filter_by_state(data: list[dict[str, Any]], state: str = "EXECUTED") -> list[dict[str, Any]]:
-    """Функция сортировки списка словарей по значению ключа "state" """
-    filtered = []
-
-    for item in data:
-        if item.get("state") == state:
-            filtered.append(item)
-
-    return filtered
+    """Фильтрация списка операций по заданному статусу state"""
+    return [item for item in data if item.get("state") == state]
 
 
 def sort_by_date(data: list[dict[str, Any]], reverse: bool = True) -> list[dict[str, Any]]:
-    """Функция сортировки списка словарей по значению ключа "date" """
+    """Сортировка списка операций по дате. Элементы без даты отправляются в конец"""
 
-    return sorted(data, key=lambda item: item["date"], reverse=reverse)
+    def safe_date(item: dict[str, Any]) -> str:
+        return item.get("date") or ("9999-12-31T23:59:59" if reverse else "0000-01-01T00:00:00")
+
+    return sorted(data, key=safe_date, reverse=reverse)
 
 
 # Проверка
@@ -25,14 +22,11 @@ if __name__ == "__main__":
         {"id": 939719570, "state": "EXECUTED", "date": "2018-06-30T02:08:58.425572"},
         {"id": 594226727, "state": "CANCELED", "date": "2018-09-12T21:27:25.241689"},
         {"id": 615064591, "state": "CANCELED", "date": "2018-10-14T08:21:33.419441"},
+        {"id": 123456789, "state": "EXECUTED"},  # Без даты
     ]
 
     print("Фильтрация по статусу EXECUTED:")
     for operation in filter_by_state(operations):
-        print(operation)
-
-    print("\nФильтрация по статусу CANCELED:")
-    for operation in filter_by_state(operations, "CANCELED"):
         print(operation)
 
     print("\nСортировка по дате (убывание):")
