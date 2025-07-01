@@ -4,6 +4,10 @@
 
 Project 1 - виджет на Python для банковских операций.
 
+## Структура проекта:
+
+...
+
 ## Ссылка:
 
 [GitHub](https://github.com/culturegod93/project1)
