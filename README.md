@@ -25,6 +25,20 @@ Project 1
 ├── poetry.lock
 └── poetry.toml
 
+## Тестирование:
+
+В проекте реализованы автоматические тесты с использованием pytest и фикстур.
+
+Запуск тестов:
+poetry run pytest
+
+Проверка покрытия:
+poetry run pytest --cov=src
+
+Тестируемые модули: masks.py, widget.py, processing.py.
+
+Используется: параметризация и фикстуры (conftest.py).
+
 ## Ссылка:
 
 [GitHub](https://github.com/culturegod93/project1)
@@ -37,7 +51,7 @@ git clone https://github.com/culturegod93/project1
 ~~~
 2. Установите зависимости:
 ~~~
-pip install -r requirements.txt
+poetry install
 ~~~
 
 ## Документация:
