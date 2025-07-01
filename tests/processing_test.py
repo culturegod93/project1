@@ -15,8 +15,8 @@ def sample_operations() -> List[Dict[str, Any]]:
         {"id": 2, "state": "CANCELED", "date": "2021-06-01T09:30:00"},
         {"id": 3, "state": "EXECUTED", "date": "2019-05-15T15:45:00"},
         {"id": 4, "state": "PENDING", "date": "2023-03-22T10:00:00"},
-        {"id": 5, "date": "2022-03-22T10:00:00"},  # нет ключа state
-        {"id": 6, "state": "EXECUTED"},  # нет ключа date
+        {"id": 5, "date": "2022-03-22T10:00:00"},
+        {"id": 6, "state": "EXECUTED"},
     ]
 
 
@@ -44,8 +44,8 @@ def test_filter_by_state_missing_key(sample_operations: List[Dict[str, Any]]) ->
 @pytest.mark.parametrize(
     "reverse, expected_order",
     [
-        (True, [6, 4, 5, 2, 1, 3]),  # убывание — без даты first (9999-99...)
-        (False, [6, 3, 1, 2, 5, 4]),  # возрастание — без даты first (0000-00...)
+        (True, [6, 4, 5, 2, 1, 3]),
+        (False, [6, 3, 1, 2, 5, 4]),
     ],
 )
 def test_sort_by_date(sample_operations: List[Dict[str, Any]], reverse: bool, expected_order: List[int]) -> None:
@@ -67,17 +67,25 @@ def test_sort_by_date_all_missing_date() -> None:
     assert [item["id"] for item in result] == [1, 2]
 
 
-def test_filter_by_state_empty_list() -> None:
-    """Фильтрация по состоянию должна возвращать пустой список, если вход пуст."""
-    assert filter_by_state([]) == []
-
-
-def test_sort_by_date_all_elements_without_date() -> None:
-    """Все элементы без ключа date — порядок не должен ломаться."""
-    data = [
-        {"id": 10, "state": "EXECUTED"},
-        {"id": 20, "state": "CANCELED"},
-        {"id": 30, "state": "PENDING"},
+def test_sort_by_date_no_date_reverse_true() -> None:
+    data: List[Dict[str, Any]] = [
+        {"id": 1, "date": "2023-01-01T00:00:00"},
+        {"id": 2},  # без даты → становится 9999-12-31
     ]
-    result = sort_by_date(data)
-    assert [item["id"] for item in result] == [10, 20, 30]
+    result = sort_by_date(data, reverse=True)
+    assert [item["id"] for item in result] == [2, 1]
+
+
+def test_sort_by_date_no_date_reverse_false() -> None:
+    data: List[Dict[str, Any]] = [
+        {"id": 1, "date": "2023-01-01T00:00:00"},
+        {"id": 2},  # без даты
+    ]
+    result = sort_by_date(data, reverse=False)
+    assert [item["id"] for item in result] == [2, 1]
+
+
+def test_filter_by_state_empty_input() -> None:
+    empty_data: List[Dict[str, Any]] = []
+    result = filter_by_state(empty_data, state="EXECUTED")
+    assert result == []
