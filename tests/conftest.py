@@ -1,4 +1,6 @@
 from typing import Any
+from typing import Dict
+from typing import List
 
 import pytest
 
@@ -63,7 +65,7 @@ def sample_dates() -> list[str]:
 
 
 @pytest.fixture
-def sample_currency_data():
+def sample_currency_data() -> List[Dict[str, Any]]:
     return [
         {"id": 1, "currency": "USD"},
         {"id": 2, "currency": "EUR"},
@@ -73,7 +75,7 @@ def sample_currency_data():
 
 
 @pytest.fixture
-def sample_description_data():
+def sample_description_data() -> List[Dict[str, Any]]:
     return [
         {"id": 1, "description": "Оплата заказа"},
         {"id": 2},
