@@ -1,10 +1,13 @@
+from typing import Any
+from typing import Dict
+from typing import List
+
 import pytest
-from typing import List, Dict, Any
-from src.generators import (
-    filter_by_currency,
-    transaction_descriptions,
-    card_number_generator,
-)
+
+from src.generators import card_number_generator
+from src.generators import filter_by_currency
+from src.generators import transaction_descriptions
+
 
 @pytest.mark.parametrize(
     "currency, expected_ids",
@@ -12,7 +15,7 @@ from src.generators import (
         ("USD", [1, 3]),
         ("EUR", [2]),
         ("RUB", []),
-    ]
+    ],
 )
 def test_filter_by_currency_parametrized(
     sample_currency_data: List[Dict[str, Any]],
@@ -35,7 +38,7 @@ def test_transaction_descriptions(sample_description_data: List[Dict[str, Any]])
         (1, 4, ["0000000000000001", "0000000000000002", "0000000000000003"]),
         (0, 2, ["0000000000000000", "0000000000000001"]),
         (10, 10, []),
-    ]
+    ],
 )
 def test_card_number_generator_parametrized(
     start: int,
