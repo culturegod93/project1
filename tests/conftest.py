@@ -60,3 +60,22 @@ def sample_dates() -> list[str]:
         "",  # пустая дата
         "invalid-date-format",
     ]
+
+
+@pytest.fixture
+def sample_currency_data():
+    return [
+        {"id": 1, "currency": "USD"},
+        {"id": 2, "currency": "EUR"},
+        {"id": 3, "currency": "USD"},
+        {"id": 4},  # без ключа currency
+    ]
+
+
+@pytest.fixture
+def sample_description_data():
+    return [
+        {"id": 1, "description": "Оплата заказа"},
+        {"id": 2},
+        {"id": 3, "description": "Возврат средств"},
+    ]
