@@ -1,4 +1,6 @@
 from typing import Any
+from typing import Dict
+from typing import List
 
 import pytest
 
@@ -59,4 +61,23 @@ def sample_dates() -> list[str]:
         "2000-01-01T00:00:00",
         "",  # пустая дата
         "invalid-date-format",
+    ]
+
+
+@pytest.fixture
+def sample_currency_data() -> List[Dict[str, Any]]:
+    return [
+        {"id": 1, "currency": "USD"},
+        {"id": 2, "currency": "EUR"},
+        {"id": 3, "currency": "USD"},
+        {"id": 4},  # без ключа currency
+    ]
+
+
+@pytest.fixture
+def sample_description_data() -> List[Dict[str, Any]]:
+    return [
+        {"id": 1, "description": "Оплата заказа"},
+        {"id": 2},
+        {"id": 3, "description": "Возврат средств"},
     ]
