@@ -11,6 +11,7 @@ Project 1
 │ └── index.html
 ├── src
 │ ├── init.py
+│ ├── decorators.py
 │ ├── generators.py
 │ ├── masks.py
 │ ├── widget.py
@@ -18,6 +19,7 @@ Project 1
 ├── tests
 │ ├── init.py
 │ ├── conftest.py
+│ ├── decorators_test.py
 │ ├── generators_test.py
 │ ├── masks_test.py
 │ ├── widget_test.py
@@ -31,7 +33,7 @@ Project 1
 
 ## Тестирование:
 
-В проекте реализованы автоматические тесты с использованием pytest и фикстур. Добавлен новый тест (generators_test.py) и обновлны фикстуры (conftest.py).
+В проекте реализованы автоматические тесты с использованием pytest и фикстур. Добавлен новый тест (decorators_test.py).
 
 1. Запуск тестов:
 ~~~
@@ -43,7 +45,7 @@ poetry run pytest
 poetry run pytest --cov=src
 ~~~
 
-Тестируемые модули: generators.py, masks.py, widget.py, processing.py.
+Тестируемые модули: decorators.py, generators.py, masks.py, widget.py, processing.py.
 
 Используется: параметризация и фикстуры (conftest.py).
 
