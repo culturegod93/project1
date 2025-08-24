@@ -15,19 +15,24 @@ Project 1
 ├── src
 │ ├── init.py
 │ ├── decorators.py
+│ ├── external_api.py
 │ ├── generators.py
 │ ├── masks.py
-│ ├── widget.py
-│ └── processing.py
+│ ├── processing.py
+│ ├── utils.py
+│ └── widget.py
 ├── tests
 │ ├── init.py
 │ ├── conftest.py
 │ ├── decorators_test.py
+│ ├── external_api_test.py
 │ ├── generators_test.py
 │ ├── masks_test.py
 │ ├── widget_test.py
-│ └── processing_test.py
+│ ├── processing_test.py
+│ └── utils_test.py
 ├── .coverage
+├── .env.template
 ├── .flake8
 ├── .gitignore
 ├── README.md
@@ -48,7 +53,7 @@ poetry run pytest
 poetry run pytest --cov=src
 ~~~
 
-Тестируемые модули: decorators.py, generators.py, masks.py, widget.py, processing.py.
+Тестируемые модули: decorators.py, external_api, generators.py, masks.py, processing.py, utils.py, widget.py. 
 
 Используется: параметризация и фикстуры (conftest.py).
 
