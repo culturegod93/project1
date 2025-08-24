@@ -7,24 +7,32 @@ Project 1 - виджет на Python для банковских операци�
 ## Структура проекта:
 
 Project 1
+├── data
+│ ├── init.py
+│ └── operations.json
 ├── htmlcov
 │ └── index.html
 ├── src
 │ ├── init.py
 │ ├── decorators.py
+│ ├── external_api.py
 │ ├── generators.py
 │ ├── masks.py
-│ ├── widget.py
-│ └── processing.py
+│ ├── processing.py
+│ ├── utils.py
+│ └── widget.py
 ├── tests
 │ ├── init.py
 │ ├── conftest.py
 │ ├── decorators_test.py
+│ ├── external_api_test.py
 │ ├── generators_test.py
 │ ├── masks_test.py
 │ ├── widget_test.py
-│ └── processing_test.py
+│ ├── processing_test.py
+│ └── utils_test.py
 ├── .coverage
+├── .env.template
 ├── .flake8
 ├── .gitignore
 ├── README.md
@@ -33,7 +41,7 @@ Project 1
 
 ## Тестирование:
 
-В проекте реализованы автоматические тесты с использованием pytest и фикстур. Добавлен новый тест (decorators_test.py).
+В проекте реализованы автоматические тесты с использованием pytest, фикстур, mock и patch. Добавлен новые тесты (utils.py и external_api_test.py).
 
 1. Запуск тестов:
 ~~~
@@ -45,7 +53,7 @@ poetry run pytest
 poetry run pytest --cov=src
 ~~~
 
-Тестируемые модули: decorators.py, generators.py, masks.py, widget.py, processing.py.
+Тестируемые модули: decorators.py, external_api, generators.py, masks.py, processing.py, utils.py, widget.py. 
 
 Используется: параметризация и фикстуры (conftest.py).
 
