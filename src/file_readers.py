@@ -1,10 +1,10 @@
 import logging
 from pathlib import Path
 from typing import Any
+
 import pandas as pd
 
-
-# Создаем папку logs, если её нет
+# Создаём папку logs, если её нет
 Path("logs").mkdir(exist_ok=True)
 
 # Настраиваем логгер для модуля file_readers
@@ -19,29 +19,18 @@ logger.addHandler(file_handler)
 
 def read_csv(file_path: str) -> list[dict[str, Any]]:
     """
-    Прочитать CSV-файл с транзакциями и вернуть список словарей.
+    Считать CSV-файл и вернуть список транзакций.
 
-    Возвращает пустой список, если:
-    - файл не найден;
-    - файл пустой;
-    - произошла ошибка при чтении.
-
-    :param file_path: путь к CSV-файлу
-    :return: список словарей с транзакциями или []
+    Возвращает пустой список, если файл пустой или произошла ошибка.
     """
-    path = Path(file_path)
-    if not path.exists() or not path.is_file():
-        logger.error(f"CSV-файл не найден или не является файлом: {file_path}")
-        return []
-
     try:
         df = pd.read_csv(file_path)
         if df.empty:
             logger.warning(f"CSV-файл пустой: {file_path}")
             return []
-        data = df.to_dict(orient="records")
-        logger.debug(f"CSV-файл успешно прочитан: {file_path}, количество записей: {len(data)}")
-        return data
+        result: list[dict[str, Any]] = [{str(k): v for k, v in row.items()} for row in df.to_dict(orient="records")]
+        logger.debug(f"CSV-файл успешно прочитан: {file_path}, строк: {len(result)}")
+        return result
     except Exception as e:
         logger.error(f"Ошибка при чтении CSV-файла {file_path}: {e}")
         return []
@@ -49,29 +38,18 @@ def read_csv(file_path: str) -> list[dict[str, Any]]:
 
 def read_excel(file_path: str) -> list[dict[str, Any]]:
     """
-    Прочитать Excel-файл с транзакциями и вернуть список словарей.
+    Считать Excel-файл и вернуть список транзакций.
 
-    Возвращает пустой список, если:
-    - файл не найден;
-    - файл пустой;
-    - произошла ошибка при чтении.
-
-    :param file_path: путь к Excel-файлу
-    :return: список словарей с транзакциями или []
+    Возвращает пустой список, если файл пустой или произошла ошибка.
     """
-    path = Path(file_path)
-    if not path.exists() or not path.is_file():
-        logger.error(f"Excel-файл не найден или не является файлом: {file_path}")
-        return []
-
     try:
         df = pd.read_excel(file_path)
         if df.empty:
             logger.warning(f"Excel-файл пустой: {file_path}")
             return []
-        data = df.to_dict(orient="records")
-        logger.debug(f"Excel-файл успешно прочитан: {file_path}, количество записей: {len(data)}")
-        return data
+        result: list[dict[str, Any]] = [{str(k): v for k, v in row.items()} for row in df.to_dict(orient="records")]
+        logger.debug(f"Excel-файл успешно прочитан: {file_path}, строк: {len(result)}")
+        return result
     except Exception as e:
         logger.error(f"Ошибка при чтении Excel-файла {file_path}: {e}")
         return []

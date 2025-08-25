@@ -16,6 +16,7 @@ Project 1
 │ ├── init.py
 │ ├── decorators.py
 │ ├── external_api.py
+│ ├── file_readers.py
 │ ├── generators.py
 │ ├── masks.py
 │ ├── processing.py
@@ -26,6 +27,7 @@ Project 1
 │ ├── conftest.py
 │ ├── decorators_test.py
 │ ├── external_api_test.py
+│ ├── file_readers_test.py
 │ ├── generators_test.py
 │ ├── masks_test.py
 │ ├── processing_test.py
@@ -41,7 +43,7 @@ Project 1
 
 ## Тестирование:
 
-В проекте реализованы автоматические тесты с использованием pytest, фикстур, mock и patch. Добавлен новые тесты (utils.py и external_api_test.py).
+В проекте реализованы автоматические тесты с использованием pytest, фикстур, mock и patch. Добавлен новый тест (file_readers_test.py).
 
 1. Запуск тестов:
 ~~~
@@ -53,7 +55,7 @@ poetry run pytest
 poetry run pytest --cov=src
 ~~~
 
-Тестируемые модули: decorators.py, external_api, generators.py, masks.py, processing.py, utils.py, widget.py. 
+Тестируемые модули: decorators.py, external_api.py, file_readers.py, generators.py, masks.py, processing.py, utils.py, widget.py. 
 
 Используется: параметризация и фикстуры (conftest.py).
 
