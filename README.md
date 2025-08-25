@@ -8,10 +8,10 @@ Project 1 - виджет на Python для банковских операци�
 
 Project 1
 ├── data
-│ ├── init.py
 │ └── operations.json
 ├── htmlcov
 │ └── index.html
+├── logs
 ├── src
 │ ├── init.py
 │ ├── decorators.py
@@ -28,9 +28,9 @@ Project 1
 │ ├── external_api_test.py
 │ ├── generators_test.py
 │ ├── masks_test.py
-│ ├── widget_test.py
 │ ├── processing_test.py
-│ └── utils_test.py
+│ ├── utils_test.py
+│ └──  widget_test.py
 ├── .coverage
 ├── .env.template
 ├── .flake8
