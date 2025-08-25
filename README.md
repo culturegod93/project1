@@ -8,6 +8,8 @@ Project 1 - виджет на Python для банковских операци�
 
 Project 1
 ├── data
+│ ├── transactions.csv
+│ ├── transactions_excel.xlsx
 │ └── operations.json
 ├── htmlcov
 │ └── index.html
