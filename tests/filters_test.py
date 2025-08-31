@@ -2,8 +2,6 @@ from typing import Any
 from typing import Dict
 from typing import List
 
-import pytest
-
 from src.filters import process_bank_operations
 from src.filters import process_bank_search
 from src.processing import filter_by_state
